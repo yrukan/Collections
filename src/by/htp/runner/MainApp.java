@@ -7,7 +7,8 @@ import java.util.TreeSet;
 
 import by.htp.bean.Student;
 import by.htp.bean.StudentAgeComparator;
-import by.htp.bean.StudentsFullComparator;
+import by.htp.bean.StudentNameComparator;
+import by.htp.bean.StudentSurnameComparator;
 
 import java.util.Comparator;
 
@@ -67,14 +68,17 @@ public class MainApp {
 		}
 		
 		System.out.println();
-		Set<Student> treeSet1 = new TreeSet<>(new StudentAgeComparator());
 		
-		treeSet1.add(new Student("Name1", "Surname1", 17));
-		treeSet1.add(new Student("Name2", "Surname2", 18));
-		treeSet1.add(new Student("Name3", "Surname3", 18));
-		treeSet1.add(new Student("Name4", "Surname4", 17));
-		treeSet1.add(new Student("Name5", "Surname5", 17));
-		treeSet1.add(new Student("Name6", "Surname6", 18));
+		//StudentAgeComparator stComp = new StudentAgeComparator();
+		Comparator<Student> stComp = new StudentNameComparator().thenComparing(new StudentSurnameComparator().thenComparing(new StudentAgeComparator()));
+		TreeSet<Student> treeSet1 = new TreeSet<>(stComp);
+		
+		treeSet1.add(new Student("Alla", "Ivanov", 17));
+		treeSet1.add(new Student("Alla", "Petrova", 18));
+		treeSet1.add(new Student("Ivan", "Sidorov", 21));
+		treeSet1.add(new Student("Alex", "Ivanov", 20));
+		treeSet1.add(new Student("Olga", "Petrova", 16));
+		treeSet1.add(new Student("Oleg", "Sidirov", 22));
 		
 		for (Student s : treeSet1) {
 			System.out.println(s.toString());
@@ -86,9 +90,7 @@ public class MainApp {
 			public int compare(Student st1, Student st2){
 				return st1.getName().compareTo(st2.getName());
 			}
-		}); */
+		});*/ 
 	}
 	
 }
-
-
